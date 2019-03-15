@@ -6,7 +6,7 @@ use App\Transaction;
 use App\User;
 
 use Illuminate\Http\Request;
-use App\Facades\PaymentPlan;
+use App\Plan;
 
 class TransactionController extends Controller
 {
@@ -44,10 +44,10 @@ class TransactionController extends Controller
         $userPlan->name = $request->name;
         $userPlan->user_id =auth()->user()->id;
         $user = User::find($userPlan->user_id);
-        $userPlan->payment_plan_id= $request->id; 
-        //$plan= new PaymentPlan();
-        // $plan_id= $plan->find($userPlan->payment_plan_id);
-        // $plan_id->planTrans()->save($userPlan);
+        $userPlan->plan_id= $request->id; 
+        // $plan= new Plan();
+        //  $plan_id= $plan->find($userPlan->payment_plan_id);
+        //  $plan_id->planTrans()->save($userPlan);
         $user->trans()->save($userPlan);
 
         return redirect(route('myPlan'));
@@ -69,7 +69,8 @@ class TransactionController extends Controller
         
         $user_id = auth()->user()->id;
         $user = User::findOrFail($user_id);
-        return view('myplane')->with('plan', $user->trans);
+        
+        return view('myplane')->with('user', $user->trans);
         
         
     }

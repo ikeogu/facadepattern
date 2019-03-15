@@ -26,10 +26,11 @@ Route::get('/home', 'HomeController@index');
 Route::get('/myplan', 'TransactionController@myplan')->name('myPlan');
 Route::resource('user', 'UserController');
 Route::resource('transaction', 'TransactionController');
-Route::get('/trasaction/{key}/currency','Plans@changeCurr')->name('curr');
+Route::get('/trasaction/{key}/currency','Plans@update')->name('curr');
 
 Route::get('/', 'Plans@plans')->name('post');
 Route::get('/plan/{key?}', 'Plans@plan')->name('plan');
+Route::get('/upgrade', 'Plans@planUpgrade')->name('planu');
 
 
 

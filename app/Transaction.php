@@ -11,6 +11,6 @@ class Transaction extends Model
         return $this->belongsTo('App\User');
     }
     public function plan(){
-        return $this->belongsTo('App\Facades\PaymentPlan');
+        return $this->belongsTo('App\Plan');
     }
 }

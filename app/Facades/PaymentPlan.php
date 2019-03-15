@@ -3,6 +3,7 @@
 namespace App\Facades;
 
 use Illuminate\Support\Facades\Facade;
+use App\Plan;
 
 class PaymentPlan
 {
@@ -54,15 +55,16 @@ class PaymentPlan
         return $plan;
     }
     public  function all(){
-         $plans = \DB::table('payment_plans')->get();
-        return ($plans);			
+        $plan = new Plan;
+        $plans = $plan->get();
+        return $plans;			
     }
-    public function find($id){
-        $plan = \DB::table('payment_plans')->where('$id',$id);
+    public  function upgrade(){
         
-		return $plan;
+        $plans = 0;
+        $plans+=$plans;
+        return $plans;			
     }
-    public function planTrans(){
-       return $this->hasManyThrough('App\User','App\Transaction');
-    }
+   
+    
 }

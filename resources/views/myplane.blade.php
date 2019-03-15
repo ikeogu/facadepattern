@@ -9,16 +9,18 @@
 
                 <div class="card-body">
                 
-                @foreach($plan as $plans )
+                @foreach($user as $plans )
+                
                 <div class="row">
-                    @if($plans->name == 'Free')    
+                
+                    @if($plans->name === 'free')    
                         <div class="col col-lg-4">
                             <h3>{{$plans->name}}</h3>
                         </div>
                         <div  class="col col-lg-6">    
                             <a href="transaction/{{$plans->id}}/edit">Edit Name</a>
                         </div>    
-                    @elseif($plans->name == 'Basic' OR $plans->name == 'Professional' ) 
+                    @elseif($plans->name === 'basic'  ) 
                     <div class="col col-lg-4">
 
                             <h3>{{$plans->name}}</h3>
@@ -26,9 +28,19 @@
                     <div  class="col col-lg-6">        
                             <a href="transaction/{{$plans->id}}/edit">Edit Name</a>
                             <a href="{{route('curr',[$plans->id])}}">Change Currency</a>
-                            <a href="transaction/{{$plans->id}}/upgrade">Upgrade</a>
+                            
                     </div>        
-                    @endif 
+                    @elseif( $plans->name ===  'professional') 
+                    <div class="col col-lg-4">
+
+                    <h3>{{$plans->name}}</h3>
+                    </div>
+                    <div  class="col col-lg-6">        
+                    <a href="transaction/{{$plans->id}}/edit">Edit Name</a>
+                    <a href="{{route('curr',[$plans->id])}}">Change Currency</a>
+                    <a href="{{route('planu')}}">Upgrade</a>
+                    </div>
+                    @endif
                  </div>    
                 @endforeach
                 </div>

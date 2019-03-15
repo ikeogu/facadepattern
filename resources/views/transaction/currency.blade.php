@@ -24,14 +24,14 @@
                                         <p>{{ \Session::get('success') }}</p>
                                     </div><br />
                             @endif
-                <form class="form-horizontal" method="POST" action="{{route('transaction.update',[$plans_id->id])}}" enctype="multipart/form-data">
+                <form class="form-horizontal" method="POST" action="{{route('curr',[$plans->id])}}" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="PATCH">
                        
                             <div class="form-group row">
                            
 
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="currency" value="{{$plans_id->currency}}" required autofocus>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="currency" value="{{$plans->currency}}" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback" role="alert">

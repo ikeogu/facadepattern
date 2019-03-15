@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransTable extends Migration
+class CreatePlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateTransTable extends Migration
      */
     public function up()
     {
-        Schema::table('transactions', function (Blueprint $table) {
-            $table->integer('plan_id');
-           
+        Schema::create('plans', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('period');
+            $table->string('currency');
+            $table->string('amount');
+            $table->timestamps();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateTransTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('plans');
     }
 }

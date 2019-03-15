@@ -3,6 +3,7 @@ use Illuminate\Support\Facades\DB;
 namespace App\Http\Controllers;
 use Auth;
 use App\Transaction;
+use App\Plan;
 use App\Facades\PaymentPlan;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class Plans extends Controller
     {
         Auth::user();
         
-        $planFacade = Plans::all();
+        $planFacade =new PaymentPlan;
         $allPlans = $planFacade->all();
         return view('plan',['allPlans'=>$allPlans]);
        
@@ -39,27 +40,34 @@ class Plans extends Controller
    public function changeCurr($id)
     {
         $plans= Transaction::find($id);
-        $mainplan= new PaymentPlan();
-        $plans_id= $mainplan->find($plans);
+        
+        $mainplan= new Plan();
+        $plans= $mainplan->find($plans->id);
+        
         
         // show the edit form and pass the nerd
         return view('transaction.currency')
-            ->with('plans_id', $plans_id);
+            ->with('plans', $plans);
     }
-    public function updateCurr(Request $request,$id)
+    public function update(Request $request,$id)
     {
+        $plans = Transaction::find($id);
+        $mainplan= new Plan();
+        $plans= $mainplan->find($plans->id);
+        $plans->currency  = '#';
         
-        
-            $plans = Transaction::find($id);
-            $mainplan= new PaymentPlan();
-            $plan_id= $mainplan->find($plans);
-            $plans_id->currency  = $request->currency;
-            
-            $plans->save();
+       
+        $plans->save();
 
-            // redirect
-            return redirect(route('myPlan'))->with('message', 'Successfully updated ');
+        // redirect
+        return redirect(route('myPlan'))->with('message', 'Successfully updated ');
             
         
+    }
+
+    public function planUpgrade(){
+        $mainplan= new PaymentPlan();
+        $plans= $mainplan->upgrade(); 
+        return 'Upgrade was Successful';
     }
 }
